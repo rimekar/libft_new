@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkarout <rkarout>                          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:49:01 by rkarout           #+#    #+#             */
-/*   Updated: 2024/05/22 16:48:16 by rkarout          ###   ########.fr       */
+/*   Updated: 2024/05/22 21:02:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,37 @@
 #include <stdlib.h>
 #include "libft.h"
 
-int	ft_atoi(const char *nptr)
-{
-	int	num;
-	int	sign;
 
-	num = 0;
-	sign = 1;
-	while (*nptr && *nptr == ' ')
-		nptr++;
-	if (*nptr == '-')
+int ft_atoi(const char *nptr)
+{
+    int num;
+    int sign;
+	int digit;
+
+	
+    num = 0;
+    sign = 1;
+    while (*nptr == ' ')
+        nptr++;
+    if (*nptr == '-')
 	{
-		sign = -1;
-		nptr++;
-	}
+        sign = -1;
+        nptr++;
+    }
 	else if (*nptr == '+')
-		nptr++;
-	while (*nptr && *nptr >= '0' && *nptr <= '9')
+        nptr++;
+    while (*nptr >= '0' && *nptr <= '9')
 	{
-		num = num * 10 + (*nptr - '0');
-		nptr++;
-	}
-	return (sign * num);
+		digit = *nptr - '0';
+        if (num > 214748364 || (num == 214748364 && digit > 7))
+            return 0;
+        num = num * 10 + digit;
+        nptr++;
+    }
+    return (sign * num);
 }
-/*
+
+
 int main(void)
 {
     printf("atoi: %d == ft_atoi: %d \n", atoi("123"),ft_atoi("123"));
@@ -53,4 +60,3 @@ int main(void)
 
     return (0);
 }
-*/
