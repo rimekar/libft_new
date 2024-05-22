@@ -1,47 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkarout <rkarout>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 14:09:14 by rkarout           #+#    #+#             */
-/*   Updated: 2024/05/22 16:48:20 by rkarout          ###   ########.fr       */
+/*   Created: 2024/05/22 15:48:32 by rkarout           #+#    #+#             */
+/*   Updated: 2024/05/22 16:47:53 by rkarout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "libft.h"
 
-#include <stdio.h>
-#include <string.h>
-
-void	ft_bzero(void *s, size_t n)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	unsigned char	*p;
+	unsigned int	i;
 
-	p = s;
-	while (n--)
+	i = 0;
+	if (s == NULL || f == NULL)
+		return ;
+	while (s[i])
 	{
-		*p++ = 0;
+		f(i, &s[i]);
+		i++;
 	}
 }
 /*
+void modify_char(unsigned int i, char *c)
+{
+    *c = *c + i; 
+}
+
 int main(void)
 {
-	size_t i;
-	char str[] = "Hello, world!";
-	printf("Before bzero: '%s'\n", str);
+    char str[] = "Hello, World!";
+    printf("Original string: %s\n", str);
+    ft_striteri(str, modify_char); 
+    printf("Modified string: %s\n", str);
 
-	i = 0;
-	ft_bzero(str, strlen(str));
-
-	printf("After bzero: '");
-	while ( i++ < sizeof(str))
-	{
-		printf("%02x ", (unsigned char)str[i]);
-	}
-	printf("'\n");
-
-	return (0);
+    return (0);
 }
 */

@@ -1,28 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkarout <rkarout>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 12:38:37 by rkarout           #+#    #+#             */
-/*   Updated: 2024/05/22 15:08:33 by rkarout          ###   ########.fr       */
+/*   Created: 2024/05/22 15:52:47 by rkarout           #+#    #+#             */
+/*   Updated: 2024/05/22 16:48:06 by rkarout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <fcntl.h>
 #include "libft.h"
-#include <stdio.h>
 
-int	ft_isalpha(int c)
+void	ft_putchar_fd(char c, int fd)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return (1);
-	return (0);
+	write(fd, &c, 1);
 }
 /*
-int	main(void)
-	printf("Is alpha: a = %d\n", ft_isalpha('a'));
-	printf("Is alpha: a = %d\n", ft_isalpha('1'));
-	printf("Is alpha: a = %d\n", ft_isalpha('-'));
-	return (0);
-}*/
+int main(void)
+{
+    char c;
+    int file_fd;
+
+    c = 'A';
+    ft_putchar_fd(c, 1);
+
+
+    c = 'B';
+    ft_putchar_fd(c, 2);
+
+
+
+    file_fd = open("example_output.txt", O_WRONLY | O_CREAT | O_TRUNC, 0600);
+    if (file_fd != -1) {
+        c = 'C';
+        ft_putchar_fd(c, file_fd);
+        close(file_fd);
+    }
+
+    return (0);
+}
+*/
