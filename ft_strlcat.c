@@ -6,14 +6,11 @@
 /*   By: rkarout <rkarout>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 16:43:46 by rkarout           #+#    #+#             */
-/*   Updated: 2024/05/21 18:37:23 by rkarout          ###   ########.fr       */
+/*   Updated: 2024/06/03 17:43:11 by rkarout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-#include <stdio.h>
-#include <string.h>
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
@@ -23,8 +20,6 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	size_t	copy_len;
 	char	*dest_end;
 
-	if (size == 0)
-		return (0);
 	dest_len = ft_strlen(dest);
 	src_len = ft_strlen(src);
 	total_len = dest_len + src_len;
@@ -40,14 +35,3 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	*dest_end = '\0';
 	return (total_len);
 }
-/*
-int	main(void)
-{
-	char dest1[20] = "hello";
-	char dest2[20] = "hello";
-	char dest3[20] = "dlf";
-	char dest4[20] = "dlf";
-
-      return (0);
-}
-*/

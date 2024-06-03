@@ -6,55 +6,45 @@
 /*   By: rkarout <rkarout>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:35:26 by rkarout           #+#    #+#             */
-/*   Updated: 2024/05/22 16:48:10 by rkarout          ###   ########.fr       */
+/*   Updated: 2024/06/03 18:20:46 by rkarout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+size_t	min(size_t a, size_t b)
 {
-	char	*sub;
-	size_t	i;
+	size_t	result;
 
-	i = 0;
+	result = a;
+	if (b < a)
+		result = b;
+	return (result);
+}
+
+char	*ft_substr(const char *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	size_t	s_len;
+	size_t	max_len;
+	char	*sub;
+
 	if (!s)
 		return (NULL);
-	sub = malloc(len + 1);
-	if (sub == NULL)
+	s_len = ft_strlen (s);
+	if (start >= s_len)
+		return (ft_strdup(""));
+	max_len = min(s_len - start, len);
+	sub = malloc(max_len + 1);
+	if (!sub)
 		return (NULL);
-	while (i < len && s[start + i] != '\0')
+	i = 0;
+	while (i < max_len)
 	{
-		sub[i] = s[start + i];
-		i++;
+	sub[i] = s[start + i];
+	i++;
 	}
-	sub[i] = '\0';
+	sub[max_len] = '\0';
 	return (sub);
 }
-/*
-int main(void)
-{
-    char const *s = "Hello, World!";
-    char *substring;
-    unsigned int start;
-    size_t len;
-
-    start = 7; // Starting index for the substring
-    len = 5;   // Length of the substring
-
-    substring = ft_substr(s, start, len);
-    if (substring == NULL)
-    {
-        printf("Failed to allocate memory for substring.\n");
-    }
-    else 
-    {
-        printf("Substring: '%s'\n", substring);
-        free(substring); // Always free dynamically allocated memory
-    }
-
-    return (0);
-}*/

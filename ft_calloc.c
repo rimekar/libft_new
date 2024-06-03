@@ -1,45 +1,28 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkarout <rkarout>                          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/03 13:13:47 by rkarout           #+#    #+#             */
+/*   Updated: 2024/06/03 13:13:47 by rkarout          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
 #include <stdlib.h>
-#include <string.h>
 
-void *ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
-    void *memory;
-    size_t totalSize;
+	void	*memory;
+	size_t	total_size;
 
-    totalSize = count * size;
-    memory = malloc(totalSize);
-    if (memory != NULL)
-    {
-        memset(memory, 0, totalSize);
-    }
-
-    return memory;
+	total_size = count * size;
+	memory = malloc(total_size);
+	if (memory != NULL)
+	{
+		ft_memset(memory, 0, total_size);
+	}
+	return (memory);
 }
-/*
-int main()
-{
-    int *arr;
-    size_t num;
-    size_t i;
-
-    num = 10;
-    arr = (int *)ft_calloc(num, sizeof(int));
-    if (arr == NULL)
-    {
-        printf("Memory allocation failed\n");
-        return 1;
-    }
-
-    i = 0;
-    while (i < num)
-    {
-        printf("%d ", arr[i]);
-        i++;
-    }
-    printf("\n");
-
-    free(arr);
-    return 0;
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: rkarout <rkarout>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:01:46 by rkarout           #+#    #+#             */
-/*   Updated: 2024/05/22 15:44:28 by rkarout          ###   ########.fr       */
+/*   Updated: 2024/06/03 18:36:00 by rkarout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int		ft_atoi(const char *str);
 char	*ft_strdup(const char *s1);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
-
 char	**ft_split(char const *s, char c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
@@ -55,14 +54,12 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-/*
-
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_itoa(int n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strtrim(char const *s1, char const *set);
 
-
+/*
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n);
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);

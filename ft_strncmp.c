@@ -6,12 +6,10 @@
 /*   By: rkarout <rkarout>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:22:35 by rkarout           #+#    #+#             */
-/*   Updated: 2024/05/21 18:42:39 by rkarout          ###   ########.fr       */
+/*   Updated: 2024/06/03 18:58:21 by rkarout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
 #include "libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)

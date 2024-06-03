@@ -6,105 +6,95 @@
 /*   By: rkarout <rkarout>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:49:29 by rkarout           #+#    #+#             */
-/*   Updated: 2024/05/22 16:49:31 by rkarout          ###   ########.fr       */
+/*   Updated: 2024/06/03 19:58:04 by rkarout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "libft.h"
 
-static int	count_words(const char *s, char c)
+static int	count_words(char const *s, char c)
 {
-	int	count;
-	int	in_substring;
+	size_t	count;
+	int		i;
 
 	count = 0;
-	in_substring = 0;
-	while (*s)
+	i = 0;
+	while (s[i])
 	{
-		if (*s == c && in_substring)
-			in_substring = 0;
-		else if (*s != c && !in_substring)
+		while (s[i] && s[i] == c)
+			i++;
+		if (s[i] && s[i] != c)
 		{
-			in_substring = 1;
 			count++;
+			while (s[i] && s[i] != c)
+			i++;
 		}
-		s++;
 	}
 	return (count);
 }
 
-static char	*make_word(const char *start, const char *end)
+static char	*malloc_word(char const *s, char c)
 {
 	char	*word;
-	size_t	length;
+	int		i;
+	int		len;
 
-	length = end - start;
-	word = malloc(length + 1);
+	i = 0;
+	len = 0;
+	while (s[len] && s[len] != c)
+		len++;
+	word = (char *)malloc(sizeof (char) * (len + 1));
 	if (word == NULL)
 		return (NULL);
-	strncpy(word, start, length);
-	word[length] = '\0';
+	while (i < len)
+	{
+		word[i] = s[i];
+		i++;
+	}
+	word[i] = '\0';
 	return (word);
+}
+
+static void	*free_tab(char **tab, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free (tab);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**array;
-	int		word_count;
-	char	*start;
-	char	*end;
+	char	**tab;
+	int		words;
 	int		i;
 
-	if (!s)
-		return (NULL);
-	word_count = count_words(s, c);
-	array = malloc((word_count + 1) * sizeof(char *));
-	if (array == NULL)
+	words = count_words(s, c);
+	tab = (char **)malloc((words + 1) * sizeof(char *));
+	if (tab == NULL)
 		return (NULL);
 	i = 0;
 	while (*s)
 	{
-		if (*s != c)
+		while (*s && *s == c)
+			s++;
+		if (*s && *s != c)
 		{
-			start = (char *)s;
+			tab[i] = malloc_word(s, c);
+			if (!tab[i])
+				return (free_tab(tab, i));
+			i++;
 			while (*s && *s != c)
 				s++;
-			end = (char *)s;
-			array[i++] = make_word(start, end);
 		}
-		else
-			s++;
 	}
-	array[i] = NULL;
-	return (array);
+	tab[i] = NULL;
+	return (tab);
 }
-
-/*
-int main(void)
-{
-    char **result;
-    char *input = "*hello*fellow***students*";
-    int i;
-
-    result = ft_split(input, '*');
-    if (result == NULL)
-    {
-        printf("Failed to allocate memory for split result.\n");
-        return 1;
-    }
-
-    i = 0;
-    while (result[i])
-    {
-        printf("Result[%d]: %s\n", i, result[i]);
-        free(result[i]); // Free each string
-        i++;
-    }
-    free(result); // Free the array of strings
-
-    return 0;
-}
-*/

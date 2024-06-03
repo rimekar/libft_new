@@ -3,60 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rkarout <rkarout>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:49:01 by rkarout           #+#    #+#             */
-/*   Updated: 2024/05/22 21:02:11 by marvin           ###   ########.fr       */
+/*   Updated: 2024/06/03 18:03:49 by rkarout          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "libft.h"
 
-
-int ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
-    int num;
-    int sign;
-	int digit;
+	int	i;
+	int	num;
+	int	sign;
 
-	
-    num = 0;
-    sign = 1;
-    while (*nptr == ' ')
-        nptr++;
-    if (*nptr == '-')
+	i = 0;
+	num = 0;
+	sign = 1;
+	while (nptr[i] == ' ' || nptr[i] == '\t' || nptr[i] == '\n'
+		|| nptr[i] == '\v' || nptr[i] == '\f' || nptr[i] == '\r')
+		i++;
+	if (nptr[i] == '-')
 	{
-        sign = -1;
-        nptr++;
-    }
-	else if (*nptr == '+')
-        nptr++;
-    while (*nptr >= '0' && *nptr <= '9')
+		sign = -1;
+		i++;
+	}
+	else if (nptr[i] == '+')
+		i++;
+	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		digit = *nptr - '0';
-        if (num > 214748364 || (num == 214748364 && digit > 7))
-            return 0;
-        num = num * 10 + digit;
-        nptr++;
-    }
-    return (sign * num);
-}
-
-
-int main(void)
-{
-    printf("atoi: %d == ft_atoi: %d \n", atoi("123"),ft_atoi("123"));
-   printf("atoi: %d ==== ft_atoi:%d \n", atoi("54986"), ft_atoi("54986"));
-   printf("atoi: %d ==== ft_atoi:%d \n", atoi("-2147483648"), ft_atoi("-2147483648"));
-   printf("atoi: %d ==== ft_atoi:%d \n", atoi("2147483647"), ft_atoi("2147483647"));
-   printf("atoi: %d ==== ft_atoi:%d \n", atoi("+648"), ft_atoi("+648"));
-   printf("atoi: %d ==== ft_atoi:%d \n", atoi("     123"), ft_atoi("     123"));
-    printf("atoi: %d ==== ft_atoi:%d \n", atoi("     ++123"), ft_atoi("     ++123"));
-    printf("atoi: %d ==== ft_atoi:%d \n", atoi("     --123"), ft_atoi("     --123"));
-    printf("atoi: %d ==== ft_atoi:%d \n", atoi("     --123ertet"), ft_atoi("     --123ertet"));
-    printf("atoi: %d ==== ft_atoi:%d \n", atoi("     -123ertet"), ft_atoi("     -123ertet"));
-
-    return (0);
+		num = num * 10 + (nptr[i] - '0');
+		i++;
+	}
+	return (sign * num);
 }
